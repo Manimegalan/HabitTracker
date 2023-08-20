@@ -10,7 +10,7 @@ import {
 } from "react-native";
 const { height, width } = Dimensions.get("window");
 
-const Login = ({ navigation }) => {
+const Signup = ({ navigation }) => {
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (name, value) => {
@@ -28,13 +28,20 @@ const Login = ({ navigation }) => {
         style={styles.imageContainer}
         resizeMode="contain"
       />
-      <Text style={styles.welcome}>Welcome!</Text>
+      <Text style={styles.welcome}>Create your account</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Full Name"
+        placeholderTextColor="#a1a4b2"
+        onChangeText={(value) => handleInputChange("fullName", value)}
+        value={inputValue?.email}
+      />
       <TextInput
         style={styles.input}
         placeholder="Email address"
         placeholderTextColor="#a1a4b2"
-        onChangeText={(value) => handleInputChange("email", value)}
-        value={inputValue?.email}
+        onChangeText={(value) => handleInputChange("emailAddress", value)}
+        value={inputValue?.password}
       />
       <TextInput
         style={styles.input}
@@ -43,17 +50,33 @@ const Login = ({ navigation }) => {
         onChangeText={(value) => handleInputChange("password", value)}
         value={inputValue?.password}
       />
+      <TextInput
+        style={styles.input}
+        placeholder="Confirm Password"
+        placeholderTextColor="#a1a4b2"
+        onChangeText={(value) => handleInputChange("confirmPassword", value)}
+        value={inputValue?.password}
+      />
+      <Text style={[styles.policyText, { marginTop: 10 }]}>
+        I have read the{" "}
+        <Text
+          style={[styles.text, styles.policy]}
+          onPress={() => navigation.navigate("LoginScreen")}
+        >
+          Privacy Policy
+        </Text>
+      </Text>
       <TouchableOpacity style={[styles.button]} onPress={handleSubmit}>
-        <Text style={[styles.buttonText]}>Log In</Text>
+        <Text style={[styles.buttonText]}>Sign Up</Text>
       </TouchableOpacity>
 
       <Text style={[styles.text, { marginTop: 10 }]}>
         ALREADY HAVE AN ACCOUNT?{" "}
         <Text
           style={[styles.text, styles.signIn]}
-          onPress={() => navigation.navigate("SignupScreen")}
+          onPress={() => navigation.navigate("LoginScreen")}
         >
-          SIGN UP
+          SIGN IN
         </Text>
       </Text>
     </View>
@@ -68,13 +91,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    position: "relative",
   },
   imageContainer: {
     width: 150,
     height: 150,
-    position: "absolute",
-    top: height / 8,
   },
   welcome: {
     color: "#fff",
@@ -96,7 +116,8 @@ const styles = StyleSheet.create({
     padding: 15,
     width: width - 40,
     borderRadius: 30,
-    margin: 10,
+    // margin: 10,
+    marginTop: 50,
   },
   buttonText: {
     color: "#fff",
@@ -106,11 +127,21 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#A1A4B2",
+    marginBottom: 50,
   },
   signIn: {
     color: "#fff",
     fontWeight: "bold",
   },
+  policyText: {
+    color: "#A1A4B2",
+    alignSelf: "flex-start",
+    paddingLeft: 35,
+  },
+  policy: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
 
-export default Login;
+export default Signup;
